@@ -1,0 +1,42 @@
+{% extends "layout-log.html" %}
+
+{% block title %}
+    Registro
+{% endblock %}
+
+{% block body %}
+
+
+<div class="contenedor">    
+    <div class="contenedor_img-login">
+        <img class="img-login" src="/static/resources/banner.png" alt="">
+    </div> 
+    <form action="/register" method="POST">
+        <div class="login-box bg_color">
+            
+            <div class="login-box-contenedor">
+                <h1 class="color">Login</h1>
+                <div class="login-box-contenido">
+                    <input type="text" name="username" autocomplete="off" placeholder="Nombre" required>        
+                </div>
+                <div class="login-box-contenido">
+                    <input type="password" name="password" autocomplete="off" placeholder="Contraseña" required>
+                </div>
+                <div class="login-box-contenido">
+                    <input type="password" name="confirmation" autocomplete="off" placeholder="Repetir Contraseña" required>
+                </div>
+                <div class="centrar-texto">                            
+                    <button type="submit">Registrarse</button>
+                </div>
+                {% if get_flashed_messages() %}
+                <div class="alert alert-success" role="alert">
+                {{ get_flashed_messages() | join(" ") }}
+                </div>
+                {% endif %}  
+            </div>
+        </div>
+         
+    </form>
+               
+</div>
+{% endblock %}

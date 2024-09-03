@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Base de Datos
+{% endblock %}
+
+{% block main %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Listado de Comidas</h2>
+
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Categoría</th>
+                <th>Peso</th>
+                <th>Calorías Mín.</th>
+                <th>Calorías Máx.</th>
+                <th>Proteínas Mín.</th>
+                <th>Proteínas Máx.</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for comida in comidas %}
+            <tr>
+                <td>{{ comida[0] }}</td>
+                <td>{{ comida[1] }}</td>
+                <td>{{ comida[2] | title }}</td>
+                <td>{{ comida[3] | title }}</td>
+                <td>{{ comida[4] }}</td>
+                <td>{{ comida[5] }}</td>
+                <td>{{ comida[6] }}</td>
+                <td>{{ comida[7] }}</td>
+                <td>{{ comida[8] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
