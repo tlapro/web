@@ -1,1 +1,265 @@
+{% extends "layout.html" %}
 
+{% block title %}
+    Inicio
+{% endblock %}
+
+{% block main %}
+<form action="/" method="post" class="container mt-4">
+    
+    <div class="card mb-3" id="desayuno">
+        <div class="card-body">
+            <h2 class="card-title">Desayuno</h2>
+                <button type="button" class="btn btn-primary add-button" data-target="desayuno">+</button>
+        </div>
+    </div>
+    
+    <div class="card mb-3" id="almuerzo">
+        <div class="card-body">
+            <h2 class="card-title">Almuerzo</h2>
+            <button type="button" class="btn btn-primary add-button" data-target="almuerzo">+</button>
+        </div>
+    </div>
+    
+    <div class="card mb-3" id="merienda">
+        <div class="card-body">
+            <h2 class="card-title">Merienda</h2>
+            <button type="button" class="btn btn-primary add-button" data-target="merienda">+</button>
+        </div>
+    </div>
+    
+    <div class="card mb-3" id="cena">
+        <div class="card-body">
+            <h2 class="card-title">Cena</h2>
+            <button type="button" class="btn btn-primary add-button" data-target="cena">+</button>
+        </div>
+    </div>
+    
+    <div class="card mb-3" id="extra">
+        <div class="card-body">
+            <h2 class="card-title">Extras</h2>
+            <button type="button" class="btn btn-primary add-button" data-target="extra">+</button>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Calcular</button>
+</form>
+
+<!-- Mostrar los resultados calculados -->
+{% if resultados %}
+    <div class="container mt-4">
+    <form action="/guardar-medicion" method="POST">
+        <h3>Resultados Totales</h3>
+        <table>
+            <tr>
+                <th>
+                    <h4>Calorías</h4>
+                    <p>Promedio del día</p>
+                    <input type="hidden" name="caloriasprom" value="{{ resultados.totales.avg_calorias | round(2) }}">
+                    <p id="caloriasprom">{{ resultados.totales.avg_calorias | round(2) }}</p>
+                </th>
+                <th>
+                    <h4>Proteínas</h4>
+                    <p>Promedio del día</p>
+                    <input type="hidden" name="proteinasprom" value="{{ resultados.totales.avg_proteinas | round(2) }}">
+                    <p id="proteinasprom">{{ resultados.totales.avg_proteinas | round(2) }}</p>
+                </th>
+                <th>
+                    <h4>Carbohidratos</h4>
+                    <p>Promedio del día</p>
+                    <input type="hidden" name="carbohidratosprom" value="{{ resultados.totales.avg_carbos | round(2) }}">
+                    <p id="carbosprom">{{ resultados.totales.avg_carbos | round(2) }}</p>
+                </th>
+                <th>
+                    <h4>Grasas</h4>
+                    <p>Promedio del día</p>
+                    <input type="hidden" name="grasasprom" value="{{ resultados.totales.avg_grasas | round(2) }}">
+                    <p id="grasasprom">{{ resultados.totales.avg_grasas | round(2) }}</p>
+                </th>
+            </tr>
+        </table>
+        <button type="submit">Guardar Medición</button>
+    </form>
+
+            
+        <h3>Resultados Individuales por Comida</h3>
+        {% for comida, valores in resultados.individuales.items() %}
+            <h4>{{ comida.capitalize() }}</h4>
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Nutriente</th>
+                        <th scope="col">Mínimas</th>
+                        <th scope="col">Máximas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Calorías</td>
+                        <td>{{ valores.calorias_min | round(2) }}</td>
+                        <td>{{ valores.calorias_max | round(2) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Proteínas</td>
+                        <td>{{ valores.proteinas_min | round(2) }}</td>
+                        <td>{{ valores.proteinas_max | round(2) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Carbohidratos</td>
+                        <td>{{ valores.carbos_min | round(2) }}</td>
+                        <td>{{ valores.carbos_max | round(2) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Grasas</td>
+                        <td>{{ valores.grasas_min | round(2) }}</td>
+                        <td>{{ valores.grasas_max | round(2) }}</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+<script>
+    document.querySelectorAll('.add-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+            const targetDiv = document.getElementById(targetId);
+            
+            // Crear un nuevo div para la comida y el peso
+            const newDiv = document.createElement('div');
+            newDiv.className = "input-group input-group-sm mb-3";
+
+            // Elementos de la comida
+            //const newSpan = document.createElement('span');
+            //newSpan.className = "input-group-text";
+            //newSpan.textContent = "Comida/Bebida";
+
+            const newInput = document.createElement('input');
+            newInput.type = "text";
+            newInput.className = "form-control";
+            newInput.name = targetId + '[]';
+            newInput.placeholder = "Comida | Bebida";
+            newInput.autocomplete = "off";
+
+            // Elementos del peso
+            const spanPeso = document.createElement('span');
+            spanPeso.className = "input-group-text";
+            spanPeso.textContent = "Peso (Grs)";
+
+            const inputPeso = document.createElement('input');
+            inputPeso.type = "number";
+            inputPeso.className = "form-control";
+            inputPeso.name = 'peso' + '[]';
+
+            // Ensamblar los elementos
+            //newDiv.appendChild(newSpan);
+            newDiv.appendChild(newInput);
+            newDiv.appendChild(spanPeso);
+            newDiv.appendChild(inputPeso);
+            targetDiv.appendChild(newDiv);
+
+            // Agregar la funcionalidad de autocompletado con ambos inputs
+            addAutocomplete(newInput, inputPeso);
+        });
+    });
+
+
+    function addAutocomplete(foodInput, weightInput) {
+        let isDeleting = false;
+
+        foodInput.addEventListener('keydown', function(event) {
+            // Detectar si se está presionando la tecla backspace o delete
+            if (event.key === 'Backspace' || event.key === 'Delete') {
+                isDeleting = true;
+            } else {
+                isDeleting = false;
+            }
+        });
+
+        foodInput.addEventListener('input', function() {
+            const query = this.value.trim();
+
+            // Limpiar dropdown previo si existe
+            clearDropdown(this);
+
+            // No mostrar dropdown mientras se borra el texto
+            if (isDeleting) {
+                return;
+            }
+
+            // Mostrar dropdown solo si hay más de 2 caracteres
+            if (query.length > 2) {
+                fetch(`/autocomplete?q=${query}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length > 0) {
+                            const dropdown = document.createElement('div');
+                            dropdown.className = "dropdown-menu show";
+                            dropdown.style.position = 'absolute'; // Posicionamiento absoluto para evitar desbordes
+
+                            // Crear nuevas opciones de autocompletado
+                            data.forEach(item => {
+                                const option = document.createElement('a');
+                                option.className = "dropdown-item";
+                                option.textContent = item;
+                                option.style.cursor = 'pointer'; // Agregar estilo cursor
+                                option.addEventListener('click', () => {
+                                    foodInput.value = item;  // Seleccionar el elemento
+                                    clearDropdown(foodInput);  // Cerrar el dropdown
+                                    fillWeightInput(item, weightInput); // Llenar el input de peso
+                                });
+                                dropdown.appendChild(option);
+                            });
+
+                            // Asegurar que el dropdown se añada después del input y no se superponga
+                            this.parentNode.appendChild(dropdown);
+                        }
+                    });
+            }
+        });
+
+        // Eliminar el dropdown al hacer clic fuera del input o cuando el input pierde el foco
+        document.addEventListener('click', function(event) {
+            // Verificar si el click es fuera del input y su dropdown asociado
+            if (!foodInput.contains(event.target) && !foodInput.nextElementSibling?.contains(event.target)) {
+                clearDropdown(foodInput);
+            }
+        });
+        
+        foodInput.addEventListener('focusout', function() {
+            // Pequeño retraso para permitir la selección del dropdown antes de que desaparezca
+            setTimeout(() => clearDropdown(foodInput), 200);
+        });
+    }
+
+    function clearDropdown(inputElement) {
+        // Eliminar cualquier dropdown existente relacionado con el input
+        let existingDropdown = inputElement.parentNode.querySelector('.dropdown-menu');
+        if (existingDropdown) {
+            existingDropdown.remove();
+        }
+    }
+
+    function fillWeightInput(foodName, inputPeso) {
+        fetch(`/get-weight?food=${encodeURIComponent(foodName)}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.weight) {
+                    inputPeso.value = data.weight; // Llenar el input de peso
+                } else {
+                    inputPeso.value = ''; // Limpiar si no se encuentra el peso
+                }
+            });
+    }
+
+    // Inicializar autocompletado en inputs ya existentes
+    document.querySelectorAll('.form-control.autocomplete').forEach(input => {
+        const correspondingWeightInput = input.parentNode.querySelector('input[type="number"]');
+        addAutocomplete(input, correspondingWeightInput);
+    });
+    
+</script>
+
+{% endblock %}
