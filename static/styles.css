@@ -1,1 +1,196 @@
+/* LOGIN */
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: 'Roboto', sans-serif; /* Fuente Profesional */
+}
+h1 {
+    text-align: center;
+}
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #0056b3;
+}
+a {
+    color: #007bff;
+    text-decoration: none;
+    margin-top: 10px;
+    text-align: center;
+}
+a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+    border-top: 1px solid #333;
+}
+.color {
+    color: #ffffff;
+}
+.bg_color {
+    background-color: #0e1013;
+}
+.contenedor {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.contenedor_img_login {
+    display: block;
+    margin: 0 auto;
+    max-width: auto;
+    max-height: auto;
+}
+.img-login {
+    width: 100%;
+    height: 100%;
+}
+.login-box {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 1000px; /* Altura del contenedor, por ejemplo */
+}
+.login-box-contenedor {
+    box-shadow: 1px 7px 27px 3px rgba(0,0,0,0.76);
+    -webkit-box-shadow: 1px 7px 27px 3px rgba(0,0,0,0.76);
+    -moz-box-shadow: 1px 7px 27px 3px rgba(0,0,0,0.76);
+    width: 400px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra verticalmente los elementos dentro del contenedor */
+    align-items: center; /* Centra horizontalmente los elementos dentro del contenedor */
+    background-color: #14171b; /* Agregué un color de fondo para destacar el formulario */
+    padding: 20px;
+    border-radius: 10px;
+}
+.login-box-contenido {
+    width: 100%; /* Asegura que los inputs y botones ocupen todo el ancho */
+    margin-bottom: 20px;
+}
+.login-box-contenido input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+.centrar-texto {
+    text-align: center;
+}
 
+.navbar {
+    background-color: #1f1f1f;
+}
+
+.navbar-brand span {
+    color: #ff4081;
+}
+
+.nav-link {
+    color: #e0e0e0 !important;
+    text-decoration: none !important; /* Quitar subrayado */
+}
+
+.nav-link:hover {
+    color: #ff4081 !important;
+    text-decoration: none !important; /* Quitar subrayado al pasar el mouse */
+}
+
+.alert {
+    background-color: #2c2c2c;
+    border-color: #ff4081;
+    color: #e0e0e0;
+}
+main.container {
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+.card {
+    background-color: #3c3c3c; /* Fondo oscuro para tarjetas */
+    color: #d4d4d4; /* Texto claro dentro de las tarjetas */
+    border: none; /* Sin bordes */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+.card-title {
+    font-size: 1.5rem; /* Tamaño de título */
+    margin-bottom: 1rem; /* Espacio inferior */
+}
+
+.btn-primary {
+    background-color: #1f8ef1; /* Color azul moderno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 0.5rem 1rem; /* Aumentar el padding */
+    transition: background-color 0.3s ease; /* Transición suave al cambiar color */
+}
+
+.btn-primary:hover {
+    background-color: #1278c7; /* Cambio de color al pasar el ratón */
+}
+
+.btn-success {
+    background-color: #28a745; /* Verde para el botón de calcular */
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #218838; /* Cambio de color al pasar el ratón */
+}
+
+.add-button {
+    float: right; /* Botón alineado a la derecha */
+}
+
+.dropdown-menu {
+    background-color: #3c3c3c; /* Fondo oscuro para dropdown */
+    color: #d4d4d4; /* Texto claro */
+}
+
+.dropdown-item {
+    color: #d4d4d4; /* Texto claro en el menú desplegable */
+}
+
+.dropdown-item:hover {
+    background-color: #5a5a5a; /* Fondo más claro al pasar el ratón */
+}
+.b_fproject {
+    
+    text-decoration-line: none;
+    transition: 0.5s ease;
+    color: #ff4081;
+}
+.b_fproject:hover {
+    font-size: 22px;
+    text-decoration: none;
+    color: #ff8cb2;
+}
+.lk_navegacion {
+    text-decoration-line: none;
+    transition: 0.5s ease;
+    color: #ff4081;
+}
+.lk_navegacion:hover {
+    text-decoration: none;
+    color: #ff8cb2;
+}
