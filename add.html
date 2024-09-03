@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Agregar
+{% endblock %}
+
+{% block main %}
+
+<main class="container">
+    <h1>Agregar Comida</h1>
+    <form action="/add" method="post" class="row g-3">
+        <div class="form-group">
+            <span>Tipo: </span>
+            <select class="mb-3" id="tipo" name="tipo" onchange="actualizarCategorias()">
+                <option value="" disabled="" selected>--Seleccionar--</option>
+                <option value="comida">Comida</option>
+                <option value="bebida">Bebida</option>
+            </select>
+            <span> Categoría: </span>
+            <select class="mb-3" id="categoria" name="categoria">
+                <option value="" disabled="" selected>--Seleccionar--</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="name">Nombre de la Comida</label>
+            <input type="text" class="form-control mb-3" id="name" name="nombre" autocomplete="off" placeholder="Nombre de la comida/bebida" required>
+            <input type="number" class="form-control mb-3" id="peso" name="peso" autocomplete="off" placeholder="Peso de la porción" required>
+            
+        </div>
+        <div class="col-md-6">
+            <label for="calories">Calorías</label>
+            <input type="number" class="form-control mb-3" id="calories" name="caloriasmin" placeholder="Calorias Mínimas" required>
+            <input type="number" class="form-control mb-3" id="calories" name="caloriasmax" placeholder="Calorias Máximas" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="proteins">Proteínas</label>
+            <input type="number" class="form-control mb-3" id="proteins" name="proteinasmin" placeholder="Proteínas Mínimas" required>
+            <input type="number" class="form-control mb-3" id="proteins" name="proteinasmax" placeholder="Proteínas Máximas" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="carbos">Carbohidratos</label>
+            <input type="number" class="form-control mb-3" id="carbos" name="carbosmin" placeholder="Carbohidratos Mínimos" required>
+            <input type="number" class="form-control mb-3" id="carbos" name="carbosmax" placeholder="Carbohidratos Máximos" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="grasas">Grasas</label>
+            <input type="number" class="form-control mb-3" id="grasas" name="grasasmin" placeholder="Grasas Mínimas" required>
+            <input type="number" class="form-control mb-3" id="grasas" name="grasasmax" placeholder="Grasas Máximas" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Agregar</button>
+
+    </form>
+    <script>
+        function actualizarCategorias() {
+            var tipo = document.getElementById("tipo").value;
+            var categoria = document.getElementById("categoria");
+
+            // Limpiar opciones previas
+            categoria.innerHTML = '<option value="" disabled="" selected>--Seleccionar--</option>'
+
+            // Categorias de comida
+            var categoriasComida = [
+                 "Carne", "Fruta", "Verdura", "Lácteos", "Cereales", "Pan", "Otro"
+            ];
+
+            var categoriasBebida = [
+                 "Agua", "Gaseosa", "Vino", "Cerveza", "Jugo", "Otra"
+            ];
+
+            if (tipo === "comida") {
+                categoriasComida.forEach(function(c) {
+                    var option = document.createElement("option");
+                    option.value = c.toLowerCase();
+                    option.text = c;
+                    categoria.add(option);
+                });
+            } else if (tipo === "bebida") {
+                categoriasBebida.forEach(function(c) {
+                    var option = document.createElement("option");
+                    option.value = c.toLowerCase();
+                    option.text = c;
+                    categoria.add(option);
+                });
+            }
+        }
+    </script>
+</main>
+
+{% endblock %}
